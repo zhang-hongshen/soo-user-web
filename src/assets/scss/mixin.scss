@@ -1,0 +1,68 @@
+@import "./variable";
+
+
+@mixin scrollbar-color {
+  [theme = 'light'] & {
+    background-color: $scrollbar-color-light !important;
+  }W
+  [theme = 'dark'] & {
+    background-color: $scrollbar-color-dark !important;
+  }
+}
+
+@mixin scrollbar-thumb-background-color {
+  [theme = 'light'] & {
+    background-color: $scrollbar-thumb-background-color-light !important;
+  }
+  [theme = 'dark'] & {
+    background-color: $scrollbar-thumb-background-color-dark !important;
+  }
+}
+
+@mixin first-color() {
+  [theme = 'light'] & {
+    color: $first-color-light !important;
+  }
+  [theme = 'dark'] & {
+    color: $first-color-dark !important;
+  }
+}
+
+@mixin first-background-color() {
+  [theme = 'light'] & {
+    background-color: $first-background-color-light !important;
+  }
+  [theme = 'dark'] & {
+    background-color: $first-background-color-dark !important;
+  }
+}
+
+
+@mixin second-color() {
+  [theme = 'light'] & {
+    color: $second-color-light !important;
+  }
+  [theme = 'dark'] & {
+    color: $second-color-dark !important;
+  }
+}
+
+@mixin second-background-color() {
+  [theme = 'light'] & {
+    background-color: $second-background-color-light !important;
+  }
+  [theme = 'dark'] & {
+    background-color: $second-background-color-dark !important;
+  }
+}
+
+@mixin second-border-color() {
+  [theme = 'light'] & {
+    border-color: $second-background-color-light !important;
+  }
+  [theme = 'dark'] & {
+    border-color: $second-background-color-dark !important;
+  }
+}
+
+

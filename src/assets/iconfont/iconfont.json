@@ -1,0 +1,72 @@
+{
+  "id": "3317006",
+  "name": "soo-user",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "17412229",
+      "name": "Emoji",
+      "font_class": "emoji",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "17412122",
+      "name": "Dark Theme",
+      "font_class": "dark-theme",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "3507065",
+      "name": "alipay",
+      "font_class": "alipay",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "9306311",
+      "name": "微信支付",
+      "font_class": "wechat-pay",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "641815",
+      "name": "个人信息",
+      "font_class": "information",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "1469250",
+      "name": "logout",
+      "font_class": "logout",
+      "unicode": "e862",
+      "unicode_decimal": 59490
+    },
+    {
+      "icon_id": "7008976",
+      "name": "order",
+      "font_class": "order",
+      "unicode": "e713",
+      "unicode_decimal": 59155
+    },
+    {
+      "icon_id": "159971",
+      "name": "cart",
+      "font_class": "cart",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1898854",
+      "name": "language",
+      "font_class": "language",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
+    }
+  ]
+}

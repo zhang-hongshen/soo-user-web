@@ -8,6 +8,8 @@ Soo项目用户端前端代码
 ![image](https://user-images.githubusercontent.com/51166261/163837684-c9ee8808-a19c-458f-b3b2-265130240da2.png)
 图片聚焦
 ![image](https://user-images.githubusercontent.com/51166261/163837822-e6a22b1a-7ed2-4788-974d-19fac1720efc.png)
+商品评论
+![screencapture-localhost-6060-product-053a10db7ea7439c9fb7b6fc16d8cee3-2022-05-19-15_59_51](https://user-images.githubusercontent.com/51166261/169243683-15623daf-9ccf-41d1-9d11-114da0399c06.png)
 购物车
 ![image](https://user-images.githubusercontent.com/51166261/163099089-39e957b7-c511-4762-b5f0-81d07988e66c.png)
 我的订单

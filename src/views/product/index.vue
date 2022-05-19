@@ -70,17 +70,11 @@
                           {{productForm.productName}}
                       </el-descriptions-item>
                       <el-descriptions-item>
-                          <template slot="label">
-                              <i class="el-icon-location-outline"></i>
-                              出发地
-                          </template>
+                          <i class="el-icon-location-outline" slot="label">出发地</i>
                           <el-tag v-for="departure in productForm.departures" :key="departure">{{departure}}</el-tag>
                       </el-descriptions-item>
                       <el-descriptions-item>
-                          <template slot="label">
-                              <i class="el-icon-location-outline"></i>
-                              目的地
-                          </template>
+                          <i class="el-icon-location-outline" slot="label">目的地</i>
                           <el-tag type="success">{{productForm.destination}}</el-tag>
                       </el-descriptions-item>
                   </el-descriptions>
@@ -94,9 +88,10 @@
                       <el-button type="primary" @click="handleSubmitComment">
                           {{$t('product.tabPane.comment.submitComment')}}
                       </el-button>
+                      &nbsp;
                       <span class="iconfont icon-emoji" @click = "emojiPickerVisible = !emojiPickerVisible"/>
-                      <br/>
-                      <VEmojiPicker class="emoji-picker" v-if="emojiPickerVisible" 
+                      <br/><br/>
+                      <VEmojiPicker class="emoji-picker" v-if="emojiPickerVisible"
                         :i18n="$i18n.locale" @select="handleSelectEmoji"/>
                   </div>
                   <div v-else>请登录后发表评论</div>
@@ -115,19 +110,27 @@
                           :total="comment.total">
                       </el-pagination>
                   </div>
-
               </el-tab-pane>
           </el-tabs>
       </div>
-      <div v-if="!recommendProductDataLoading" class="recommend-product-container">
+
+      <div class="recommend-product-container">
           <h4 class="title">{{$t('product.sideBar.recommend')}}</h4>
-          <el-carousel class="recommend-product" v-if="recommendProducts.length > 0" direction="vertical" :interval="4000">
-              <el-carousel-item v-for="(product,index) in recommendProducts" :key="index">
-                  <img class="image" :src="product.imageUrl" @click="handleJumpToProduct(product)"/>
-                  <div class="price">￥{{product.price}}</div>
-              </el-carousel-item>
-          </el-carousel>
+          <el-skeleton :loading="recommendProductDataLoading" >
+              <template slot="template">
+                  <el-skeleton-item variant="image" class="image"/>
+              </template>
+              <template slot="default">
+                  <el-carousel class="recommend-product" v-if="recommendProducts.length > 0" direction="vertical" :interval="4000">
+                      <el-carousel-item v-for="(product,index) in recommendProducts" :key="index">
+                          <img class="image" :src="product.imageUrl" @click="handleJumpToProduct(product)"/>
+                          <div class="price">￥{{product.price}}</div>
+                      </el-carousel-item>
+                  </el-carousel>
+              </template>
+          </el-skeleton>
       </div>
+
       <el-dialog class="check-out-dialog"
                  :visible.sync ="checkOutDialogVisible"
                  @close="handleCheckOutDialogClose"
@@ -390,308 +393,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/mixin";
-
-.app-container {
-  width: 100%;
-  display: inline-flex;
-  flex-direction: row;
-
-  .product-container {
-    width: 70%;
-    margin: 20px 20px 0 50px;
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    min-width: 500px;
-    @include first-color();
-    @include first-background-color();
-
-    .product-image-box {
-      width: 40%;
-      position: relative;
-      min-width: 250px;
-      display: inline-flex;
-      flex-direction: column;
-
-      .image {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-      }
-
-      .mask {
-        position: absolute;
-        width: 40%;
-        height: 40%;
-        cursor: pointer;
-        z-index: 199;
-        background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/apparel/rcxgs/tile._CB483369110_.gif);
-        display: none;
-        pointer-events: none//元素永远不会成为鼠标事件的target
-      }
-
-      .thumbnail {
-        display: inline-flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        width: 100%;
-
-        img {
-          width: 30%;
-          height: 100px;
-          border: 1px white solid;
-          object-fit: cover;
-        }
-
-        img:hover {
-          cursor: pointer;
-        }
-      }
-    }
-
-    .product-info {
-      width: 55%;
-      display: inline-flex;
-      flex-direction: column;
-      position: relative;
-      margin-left: 30px;
-      text-align: left;
-      overflow: hidden;
-      font-size: 14px;
-      min-width: 150px;
-
-      .product-image-detail {
-        position: absolute;
-        z-index: 199;
-        display: none;
-        overflow: hidden;
-      }
-
-      .title-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-items: self-start;
-
-        .product-name {
-          font-size: 24px;
-          line-height: 32px;
-        }
-        .tag {
-          margin-left: 5px;
-        }
-      }
-
-      .subtitle {
-        box-sizing: border-box;
-        li {
-          margin-bottom: 8px
-        }
-      }
-      .destination {
-        border-bottom: 1px #D5D9D9 solid;
-      }
-
-      .price {
-        font-size: 32px;
-        color: red;
-        height: 40px;
-      }
-
-      .el-form-item {
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-
-      /deep/ .el-picker-panel .el-date-picker {
-        @include second-color();
-        @include second-background-color();
-      }
-
-      /deep/ .el-form-item__label {
-        @include first-color();
-      }
-
-      /deep/ .el-input-number__decrease {
-        @include second-color();
-        @include second-background-color();
-        border: none;
-      }
-
-      /deep/ .el-input-number__increase {
-        @include second-color();
-        @include second-background-color();
-        border: none;
-      }
-
-      /deep/ .el-input__inner {
-        @include second-color();
-        @include second-background-color();
-        border: none;
-      }
-    }
-
-    .tab {
-      width: 100%;
-      margin-top: 10px;
-      text-align: center;
-
-      /deep/ .el-tabs__item {
-        @include first-color();
-      }
-
-      .product-detail {
-        margin: 0  20px 0 50px;
-
-        /deep/ .el-descriptions-item__label {
-          @include second-color();
-          @include second-background-color();
-          border: none;
-        }
-
-        /deep/ .el-descriptions-item__content {
-          @include second-color();
-          @include second-background-color();
-          border: none;
-        }
-      }
-
-      .product-comment {
-        margin: 20px 20px 0 50px;
-
-        .comment-form {
-          width: 70%;
-          margin:0 auto 30px 10px;
-          display: block;
-        }
-
-        .emoji-picker {
-          @include second-color();
-          @include second-background-color();
-          @include second-border-color();
-        }
-
-        .comment-card {
-          display: block;
-          text-align: left;
-
-          .username {
-            font-size: 14px;
-            font-weight: bold;
-          }
-
-          .create-time {
-            margin-left: 10px;
-            font-size: 13px;
-          }
-
-          .content {
-            margin-top: 5px;
-            margin-bottom: 20px;
-          }
-        }
-      }
-    }
-  }
-
-  .check-out-dialog {
-    width: 100%;
-    text-align: center !important;
-
-    .el-dialog__body {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-items: flex-start;
-      overflow-y: auto;
-
-      .check-out-card {
-        width: 100%;
-        font-size: 16px;
-        border-radius: 12px;
-        display: flex;
-        flex-direction: row;
-        justify-items: flex-start;
-        justify-content: space-between;
-        margin: 10px 10px 10px 0;
-
-        .image {
-          width: 35%;
-          border-radius: 8px;
-        }
-
-        .product-info {
-          width: 50%;
-          height: 150px;
-          display: flex;
-          flex-direction: column;
-          justify-items: flex-start;
-          justify-content: space-between;
-
-          .product-name {
-            text-align: left;
-            font-size: 24px;
-          }
-
-          .info-row {
-            display: inline-flex;
-            flex-direction: row;
-            justify-items: flex-start;
-            justify-content: space-between;
-            font-size: 16px;
-
-            .price {
-              color: red
-            }
-          }
-        }
-      }
-
-      .payment-method {
-        margin: 20px auto 20px auto;
-      }
-
-      .qr-code {
-        width: 250px;
-        object-fit: fill;
-      }
-    }
-
-    .totalAmount {
-      color: red;
-    }
-  }
-
-  .recommend-product-container {
-    margin-top: 100px;
-    width: 25%;
-    min-width: 150px;
-    height: 100%;
-    @include first-color();
-    @include first-background-color();
-
-    .title {
-      font-size: 24px;
-    }
-
-    .recommend-product {
-      width: 100%;
-
-      .image {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-      }
-
-      .price {
-        color: red;
-        font-size: 16px;
-        font-weight: bold;
-      }
-    }
-  }
-}
+@import "../../assets/scss/product";
 </style>

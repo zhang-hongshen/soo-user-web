@@ -1,12 +1,12 @@
 @import "./variable";
 
 
-@mixin scrollbar-color {
+@mixin scrollbar-background-color {
   [theme = 'light'] & {
-    background-color: $scrollbar-color-light !important;
-  }W
+    background-color: $scrollbar-background-color-light !important;
+  }
   [theme = 'dark'] & {
-    background-color: $scrollbar-color-dark !important;
+    background-color: $scrollbar-background-color-dark !important;
   }
 }
 

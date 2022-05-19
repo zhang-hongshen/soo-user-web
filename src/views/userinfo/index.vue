@@ -39,25 +39,6 @@
                     <el-descriptions-item label="手机号">{{consignee.phone}}</el-descriptions-item>
                     <el-descriptions-item label="收货地址">{{consignee.address}}</el-descriptions-item>
                 </el-descriptions>
-                <el-dialog center
-                           :visible.sync="consigneeDialogVisible"
-                           @close="handleNewCosigneeInfoDialogClose"
-                           @closed="handleNewCosigneeInfoDialogClosed">
-                    <el-form :model="consigneeForm">
-                        <el-form-item label="收货人" prop="consigneeName">
-                            <el-input v-model="consigneeForm.consigneeName" />
-                        </el-form-item>
-                        <el-form-item label="手机号" prop="phone">
-                            <el-input v-model="consigneeForm.phone" placeholder="请输入11位有效手机号"/>
-                        </el-form-item>
-                        <el-form-item label="收货地址" prop="address">
-                            <el-input v-model="consigneeForm.address" type="textarea"/>
-                        </el-form-item>
-                    </el-form>
-                    <el-button slot="footer" type="primary" @click="handleSubmitConsignee">
-                        {{$t('common.save')}}
-                    </el-button>
-                </el-dialog>
             </el-tab-pane>
             <el-tab-pane class="change-password-tab" :label="tabPaneNames[2]" :name="tabPaneNames[2]">
                 <el-form class="change-password-form"
@@ -89,6 +70,27 @@
                 </el-form>
             </el-tab-pane>
         </el-tabs>
+
+        <el-dialog custom-class="consignee-dialog" center
+                   :modal-append-to-body="false"
+                   :visible.sync="consigneeDialogVisible"
+                   @close="handleNewCosigneeInfoDialogClose"
+                   @closed="handleNewCosigneeInfoDialogClosed">
+            <el-form class="consignee-form" :model="consigneeForm">
+                <el-form-item label="收货人" prop="consigneeName">
+                    <el-input v-model="consigneeForm.consigneeName" />
+                </el-form-item>
+                <el-form-item label="手机号" prop="phone">
+                    <el-input v-model="consigneeForm.phone" placeholder="请输入11位有效手机号"/>
+                </el-form-item>
+                <el-form-item label="收货地址" prop="address">
+                    <el-input v-model="consigneeForm.address" type="textarea"/>
+                </el-form-item>
+            </el-form>
+            <el-button slot="footer" type="primary" @click="handleSubmitConsignee">
+                {{$t('common.save')}}
+            </el-button>
+        </el-dialog>
     </div>
 </template>
 
@@ -254,77 +256,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/mixin";
-
-.app-container {
-  padding: 40px;
-  @include first-color();
-
-  .tabs {
-
-    /deep/ .el-tabs__item {
-      @include first-color();
-    }
-
-    /deep/ .el-tabs__item:hover {
-      color: #1a73e8 !important;
-    }
-    .basic-info-tab {
-      margin: 10px 20px auto;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      @include second-color();
-
-      .basic-info-button {
-        border-radius: 8px;
-        margin-bottom: 20px;
-      }
-
-      .basic-info-form {
-        width: 30%;
-        text-align: center;
-        display: block;
-
-        /deep/ .el-form-item__label {
-          @include first-color();
-        }
-      }
-    }
-
-    .consignee-info-tab {
-      margin: 10px 20px auto ;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      @include second-color();
-
-      .consignee-info-button {
-        border-radius: 8px;
-        margin-bottom: 20px;
-      }
-
-      .consignee-info-description {
-        width: 50%;
-        text-align: center;
-        display: block;
-      }
-    }
-
-    .change-password-tab {
-      margin: 10px 20px auto ;
-
-      .change-password-form {
-        width: 30%;
-        text-align: center;
-        display: block;
-
-        /deep/ .el-form-item__label {
-          @include first-color();
-        }
-      }
-    }
-  }
-
-}
+@import "../../assets/scss/userinfo";
 </style>

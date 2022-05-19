@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <el-container>
+        <el-container style="height: 100%; overflow-y: auto;">
             <el-header class="header-container" height="50px">
                 <nav-bar/>
             </el-header>
@@ -59,14 +59,16 @@ html,body {
   height: 100%;
 }
 
-// ::-webkit-scrollbar {
-//   @include scrollbar-color();
-// }
+::-webkit-scrollbar {
+    @include scrollbar-background-color();
+}
 
-// ::-webkit-scrollbar-thumb {
-//   @include scrollbar-thumb-background-color();
-// }
-
+::-webkit-scrollbar-thumb {
+   @include scrollbar-thumb-background-color();
+}
+::-webkit-scrollbar-button {
+  //background-color: red;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

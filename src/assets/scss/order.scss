@@ -1,0 +1,130 @@
+@import "mixin";
+
+.main-container {
+
+  .order-container {
+    text-align: left;
+    display: block;
+    margin: 20px 0 auto 50px;
+
+    .tabs {
+
+      /deep/ .el-tabs__item {
+        @include first-color();
+      }
+
+      /deep/ .el-tabs__item:hover {
+        color: #1a73e8 !important;
+      }
+
+      .tab-pane {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0 auto 0 auto;
+        @include first-color();
+
+        /deep/ .el-collapse-item__header {
+          border: none;
+          @include second-color();
+          @include second-background-color();
+        }
+
+        .order-card {
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          text-align: right;
+          margin: 20px;
+          @include second-color();
+          @include second-background-color();
+
+          .details {
+            border: none;
+
+            .detail {
+              width: 100%;
+              text-align: right;
+              display: flex;
+
+              flex-direction: column;
+              justify-items: flex-start;
+
+              .title {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-items: flex-start;
+                justify-content: space-between;
+                @include second-color();
+                @include second-background-color();
+              }
+
+              /deep/ .el-collapse-item__wrap {
+                border: none;
+                @include second-color();
+                @include second-background-color();
+              }
+
+              /deep/ .header {
+                display: flex;
+                flex-direction: row;
+                justify-items: flex-start;
+                justify-content: space-between;
+                @include second-color();
+                @include second-background-color();
+              }
+
+              /deep/ .content {
+                display: flex;
+                flex-direction: row;
+                justify-items: flex-start;
+                justify-content: space-between;
+                @include second-color();
+                @include second-background-color();
+
+                .price {
+                  color: red;
+                }
+              }
+            }
+          }
+
+          .totalAmount {
+            color: red;
+          }
+
+          .el-button {
+            @include second-color();
+            @include second-background-color();
+          }
+        }
+      }
+    }
+
+  }
+
+  .check-out-dialog {
+    text-align: center !important;
+
+    .el-dialog__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      text-align: center !important;
+
+      .payment-method {
+        margin: 20px auto 20px auto;
+      }
+
+      .qr-code {
+        width: 250px;
+        object-fit: fill;
+      }
+    }
+
+  }
+}

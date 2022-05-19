@@ -1,0 +1,130 @@
+@import "mixin";
+
+.app-container {
+  padding: 40px;
+  @include first-color();
+
+  .tabs {
+
+    /deep/ .el-tabs__item {
+      @include first-color();
+    }
+
+    /deep/ .el-tabs__item:hover {
+      color: #1a73e8 !important;
+    }
+    .basic-info-tab {
+      margin: 10px 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      @include second-color();
+
+      .basic-info-button {
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .basic-info-form {
+        width: 30%;
+        text-align: center;
+        display: block;
+
+        /deep/ .el-form-item__label {
+          @include first-color();
+        }
+
+        /deep/ .el-form-item__content {
+          @include first-background-color();
+
+          .el-input__inner {
+            @include second-border-color();
+            @include second-color();
+            @include second-background-color();
+          }
+        }
+      }
+    }
+
+    .consignee-info-tab {
+      margin: 10px 20px auto ;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      @include second-color();
+
+      .consignee-info-button {
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .consignee-info-description {
+        width: 50%;
+        text-align: center;
+        display: block;
+      }
+    }
+
+    .change-password-tab {
+      margin: 10px 20px auto ;
+
+      .change-password-form {
+        width: 30%;
+        text-align: center;
+        display: block;
+
+        /deep/ .el-form-item__label {
+          @include first-color();
+        }
+
+        /deep/ .el-form-item__content {
+          @include first-background-color();
+
+          .el-input__inner {
+            @include second-border-color();
+            @include second-color();
+            @include second-background-color();
+          }
+        }
+      }
+    }
+  }
+
+  /deep/ .consignee-dialog {
+    @include first-color();
+    @include first-background-color();
+    border-radius: 20px;
+
+    .consignee-form {
+
+      .el-form-item {
+        margin: 15px auto 15px ;
+
+        .el-input__inner {
+          border-radius: 16px;
+          @include second-border-color();
+          @include second-color();
+          @include second-background-color();
+        }
+
+        .el-textarea__inner {
+          @include second-border-color();
+          @include second-color();
+          @include second-background-color();
+        }
+      }
+
+      .el-form-item__label {
+        @include first-color();
+      }
+    }
+
+    .el-button {
+      @include second-border-color();
+      @include second-color();
+      @include second-background-color();
+      border-radius: 16px;
+    }
+  }
+
+}

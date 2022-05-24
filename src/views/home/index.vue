@@ -1,7 +1,6 @@
 <template>
     <div class="app-container">
-
-        <el-skeleton v-if="$store.getters.userId" class="recommend-product-container" :loading="recommendProductDataLoading" animated>
+        <el-skeleton v-if="$store.getters.username" class="recommend-product-container" :loading="recommendProductDataLoading" animated>
             <template slot="template">
                 <el-skeleton-item variant="image" class="image"/>
             </template>
@@ -26,9 +25,10 @@
             <span slot="append" class="el-icon-search" @click="fetchProductData"/>
         </el-autocomplete>
 
-        <el-skeleton class="product-container" :loading="productDataLoading" animated>
-            <template slot="template" >
+        <el-skeleton class="product-container" :loading="productDataLoading" animated :count="3">
+            <template slot="template">
                 <el-skeleton-item style="width: 1500px; height: 300px;" variant="image"/>
+                <el-skeleton-item variant="text"/>
             </template>
             <template slot="default">
                 <span v-for="(productInfo, index) in productData.list" :key="index" class="product-card">
@@ -105,7 +105,8 @@ export default {
   },
   async created() {
     this.queryField = this.queryFields[0]
-    await [this.fetchRecommendProductData(), this.fetchProductData()]
+    await this.fetchRecommendProductData()
+    await this.fetchProductData()
   },
   methods:{
     async fetchRecommendProductData() {

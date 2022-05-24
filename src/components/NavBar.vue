@@ -27,7 +27,7 @@
                     <span class="iconfont icon-cart"/>
                     {{$t('navbar.cart')}}
                 </el-menu-item>
-                <el-submenu index="5" v-if="$store.getters.userId" :popper-append-to-body="false">
+                <el-submenu index="5" v-if="$store.getters.username" :popper-append-to-body="false">
                     <el-avatar slot="title" :src="$store.getters.avatar"/>
                     <el-menu-item index="5-1" @click="handleJumpToOrder">
                         <span class="iconfont icon-order"/>

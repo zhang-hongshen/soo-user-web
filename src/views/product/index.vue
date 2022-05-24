@@ -1,65 +1,81 @@
 <template>
   <div class="app-container">
-      <div v-if = "!dataLoading" class="product-container">
-          <div class="product-image-box">
-              <el-carousel :interval="4000" indicator-position="outside" ref="carousel">
-                  <el-carousel-item v-for="(item, index) of productForm.imageUrls" :key="index">
-                      <img id = "product-image" class="image" :src="item" @mouseenter="handleMouseEnter"
-                                @mousemove="handleImageZoomIn"
-                                @mouseleave="handleMouseLeave"/>
-                  </el-carousel-item>
-                  <div id="product-image-mask" class="mask"/>
-              </el-carousel>
-              <div class="thumbnail">
-                  <img v-for="(item, index) of productForm.imageUrls" :key="index" :src="item"
-                       @mouseenter="handleChangeThumbnail(index)"/>
-              </div>
-          </div>
-          <div class="product-info">
-              <img id="product-image-detail" class="product-image-detail" />
-              <div class="title-container">
-                  <span class="product-name">{{productForm.productName}}</span>
-                  <el-tag class="tag" size="medium" type="success" effect="dark">跟团游</el-tag>
-              </div>
-              <ul class="subtitle">
-                  <li>【轻奢游】35人头等舱，超大空间+USB充电+可调节皮座椅，可选2-8人小团</li>
-                  <li>【更省心】小团上门接，不早起，覆盖主城90%区域，大团多区定点接</li>
-                  <li>【超贴心】大团金牌导游讲解+小团本地老司机带队嗨玩+真纯玩无购物</li>
-              </ul>
-              <el-form label-position="left" label-width="75px" :model="productForm">
-                  <el-form-item label="价格">
-                      <div class="price">￥{{productForm.price}}</div>
-                  </el-form-item>
-                  <el-form-item class="destination" label="目的地">{{productForm.destination}}</el-form-item>
-                  <el-form-item label="出发地">
-                      <el-radio-group v-model="productForm.departure">
-                          <el-radio v-for="(departure, index) in productForm.departures"
-                                           :label="departure" :key="index"
-                                    size="medium" border>{{departure}}</el-radio>
-                      </el-radio-group>
-                  </el-form-item>
-                  <el-form-item label="出游日期">
-                      <el-date-picker
-                          v-model="productForm.date"
-                          type="date"
-                          :clearable="false"
-                          format="yyyy 年 M 月 d 日"
-                          placeholder="选择日期">
-                      </el-date-picker>
-                  </el-form-item>
-                  <el-form-item label="数量">
-                      <el-input-number
-                          v-model="productForm.num"
-                          size="medium"
-                          :min="1" :max="5"
-                          step-strictly/>
-                  </el-form-item>
-                  <el-form-item>
-                      <el-button  @click="handleCheckOut">{{$t('product.productInfo.buyNow')}}</el-button>
-                      <el-button  type="primary" @click="handleAddToShoppingCart">{{$t('product.productInfo.addToCart')}}</el-button>
-                  </el-form-item>
-              </el-form>
-          </div>
+      <div class="product-container">
+          <el-skeleton :loading="dataLoading" class="product-image-box">
+              <template slot="template">
+                  <el-skeleton-item variant="image" class="image" style="height: 300px"/>
+              </template>
+              <template slot="default">
+                  <el-carousel :interval="4000" indicator-position="outside" ref="carousel">
+                      <el-carousel-item v-for="(item, index) of productForm.imageUrls" :key="index">
+                          <img id = "product-image" class="image" :src="item" @mouseenter="handleMouseEnter"
+                               @mousemove="handleImageZoomIn"
+                               @mouseleave="handleMouseLeave"/>
+                      </el-carousel-item>
+                      <div id="product-image-mask" class="mask"/>
+                  </el-carousel>
+                  <div class="thumbnail">
+                      <img v-for="(item, index) of productForm.imageUrls" :key="index" :src="item"
+                           @mouseenter="handleChangeThumbnail(index)"/>
+                  </div>
+              </template>
+          </el-skeleton>
+
+          <el-skeleton :loading="dataLoading" class="product-info">
+              <template slot="template">
+                  <el-skeleton :rows="6" animated />
+              </template>
+              <template slot="default">
+                  <img id="product-image-detail" class="product-image-detail" />
+                  <div class="title-container">
+                      <span class="product-name">{{productForm.productName}}</span>
+                      <el-tag class="tag" size="medium" type="success" effect="dark">跟团游</el-tag>
+                  </div>
+                  <ul class="subtitle">
+                      <li>【轻奢游】35人头等舱，超大空间+USB充电+可调节皮座椅，可选2-8人小团</li>
+                      <li>【更省心】小团上门接，不早起，覆盖主城90%区域，大团多区定点接</li>
+                      <li>【超贴心】大团金牌导游讲解+小团本地老司机带队嗨玩+真纯玩无购物</li>
+                  </ul>
+                  <el-form label-position="left" label-width="75px" :model="productForm">
+                      <el-form-item label="价格">
+                          <div class="price">￥{{productForm.price}}</div>
+                      </el-form-item>
+                      <el-form-item class="destination" label="目的地">{{productForm.destination}}</el-form-item>
+                      <el-form-item label="出发地">
+                          <el-radio-group v-model="productForm.departure">
+                              <el-radio v-for="(departure, index) in productForm.departures"
+                                        :label="departure" :key="index"
+                                        size="medium" border>{{departure}}</el-radio>
+                          </el-radio-group>
+                      </el-form-item>
+                      <el-form-item label="出游日期">
+                          <el-date-picker
+                              v-model="productForm.travelDate"
+                              type="date"
+                              :editable="false"
+                              :clearable="false"
+                              :default-value="new Date()"
+                              format="yyyy 年 M 月 d 日"
+                              value-format="yyyy-MM-dd"
+                              placeholder="选择日期"
+                              :picker-options="pickerOptions">
+                          </el-date-picker>
+                      </el-form-item>
+                      <el-form-item label="数量">
+                          <el-input-number
+                              v-model="productForm.num"
+                              size="medium"
+                              :min="1" :max="5"
+                              step-strictly/>
+                      </el-form-item>
+                      <el-form-item>
+                          <el-button  @click="handleCheckOut">{{$t('product.productInfo.buyNow')}}</el-button>
+                          <el-button  type="primary" @click="handleAddToShoppingCart">{{$t('product.productInfo.addToCart')}}</el-button>
+                      </el-form-item>
+                  </el-form>
+              </template>
+          </el-skeleton>
+
           <el-tabs class="tab" v-model="activeTabPaneName" @tab-click="handleChangeTab">
               <el-tab-pane class="product-detail" :label="tabPaneNames[0]" :name="tabPaneNames[0]">
                   <el-descriptions :column="3" size="mini" border>
@@ -83,7 +99,7 @@
                             style="object-fill:fill;width:600px;height:400px;display:block;margin:0 auto 0 auto"/>
               </el-tab-pane>
               <el-tab-pane class="product-comment" :label="tabPaneNames[1]" :name="tabPaneNames[1]">
-                  <div v-if="$store.getters.userId" style="text-align: left;">
+                  <div v-if="$store.getters.username" style="text-align: left;">
                       <el-input class="comment-form" v-model="commentForm.content" type="textarea"/>
                       <el-button type="primary" @click="handleSubmitComment">
                           {{$t('product.tabPane.comment.submitComment')}}
@@ -114,14 +130,14 @@
           </el-tabs>
       </div>
 
-      <div class="recommend-product-container">
+      <div class="recommend-product-container" v-if="$store.getters.username">
           <h4 class="title">{{$t('product.sideBar.recommend')}}</h4>
           <el-skeleton :loading="recommendProductDataLoading" >
               <template slot="template">
                   <el-skeleton-item variant="image" class="image"/>
               </template>
               <template slot="default">
-                  <el-carousel class="recommend-product" v-if="recommendProducts.length > 0" direction="vertical" :interval="4000">
+                  <el-carousel class="recommend-product" direction="vertical" :interval="4000">
                       <el-carousel-item v-for="(product,index) in recommendProducts" :key="index">
                           <img class="image" :src="product.imageUrl" @click="handleJumpToProduct(product)"/>
                           <div class="price">￥{{product.price}}</div>
@@ -206,6 +222,12 @@ export default {
       recommendProductDataLoading: true,
       recommendProducts: [],
       productForm: {},
+      pickerOptions: {
+        disabledDate(time) {
+            return time.getTime() < (Date.now() - 1 * 24 * 60 * 60 * 1000) ||
+              time.getTime() > (Date.now() + 13 * 24 * 60 * 60 * 1000)
+        }
+      },
       dataLoading: true,
       activeTabPaneIndex: 0,
       activeTabPaneName: '产品详情',
@@ -219,7 +241,7 @@ export default {
         pageSize: 10,
       },
       comment: {
-        list:[],
+        list: [],
         total: 0,
       },
       checkOutForm: [],
@@ -244,10 +266,11 @@ export default {
         this.$t('product.tabPane.productDetail.name'),
         this.$t('product.tabPane.comment.name')
       ]
-    }
+    },
   },
   async created() {
-    await [this.fetchRecommendProductData(), this.fetchData()]
+    await this.fetchProductData()
+    await this.fetchRecommendProductData()
   },
   methods:{
     async fetchRecommendProductData() {
@@ -255,13 +278,13 @@ export default {
         this.recommendProducts = await Product.predict()
         this.recommendProductDataLoading = false
     },
-    async fetchData() {
+    async fetchProductData() {
       this.dataLoading = true;
       const res = await Product.getDetail(this.$route.params.id)
       this.productForm = Object.assign(res,{
         departure: res.departures[0],
         num: 1,
-        date: new Date(),
+        travelDate: '',
       })
       this.dataLoading = false;
     },
@@ -301,8 +324,14 @@ export default {
       this.$refs.carousel.setActiveItem(index)
     },
     async handleAddToShoppingCart() {
-      if(this.$store.getters.userId){//用户信息获取到了
-        const res = await Cart.add(this.productForm)
+      if(this.$store.getters.username){//用户信息获取到了
+        console.log(this.productForm.date)
+        const res = await Cart.add({
+          productId: this.productForm.productId,
+          travelDate: this.productForm.travelDate,
+          num: this.productForm.num,
+          departure: this.productForm.departure,
+        })
         if (res) {
           Message.success("添加到购物车成功")
         } else {
@@ -328,7 +357,6 @@ export default {
     async handleSubmitComment() {
       const res = await Comment.add({
         content: this.commentForm.content,
-        userId: this.$store.getters.userId,
         productId: this.productForm.productId
       })
       if (res) {
@@ -347,7 +375,7 @@ export default {
       window.open(routeUrl.href, '_blank');
     },
     handleCheckOut() {
-      if (this.$store.getters.userId) {
+      if (this.$store.getters.username) {
         //用户信息获取到了
         this.checkOutForm.push(this.productForm)
         this.checkOutDialogVisible = true

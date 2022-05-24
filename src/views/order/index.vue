@@ -10,10 +10,11 @@
                         <div v-for="(orderDetail,index) in order.orderDetails" :key="index">
                             <el-collapse class="details">
                                 <el-collapse-item class="detail" :name="index">
-                                    <h3 class="title" slot="title">
-                                        <span class="product-name">{{orderDetail.productName}}</span>
+                                    <div class="title" slot="title">
+                                        <h3 class="product-name">{{orderDetail.productName}}</h3>
                                         <span class="departure">出发地:{{orderDetail.departure}}</span>
-                                    </h3>
+                                        <span class="travel-date">时间:{{orderDetail.travelDate}}</span>
+                                    </div>
                                     <h3 class="header">
                                         <span class="num">数量</span>
                                         <span class="price">单价</span>
@@ -169,6 +170,9 @@ export default {
       const res = await Order.delete(orderId)
       if (res) {
         Message.success('删除订单成功！')
+        this.orders = this.orders.filter((order) => {
+           return order.orderId !== orderId
+        })
       } else {
         Message.error('删除订单失败！')
       }

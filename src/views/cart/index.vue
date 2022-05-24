@@ -11,7 +11,7 @@
                                 <div class="product-name">{{cart.productName}}</div>
                                 <div class="info-row">
                                     <span class="departure">出发地：{{cart.departure}}</span>
-                                    <span class="date">时间：{{cart.date}}</span>
+                                    <span class="date">时间：{{cart.travelDate}}</span>
                                 </div>
                                 <div class="info-row">
                                     <span class="price">￥{{cart.price}}</span>
@@ -39,7 +39,6 @@
                 background
                 @current-change="fetchData"
             />
-
         </div>
         <div class="app-container-aside">
 
@@ -79,7 +78,7 @@
                         <div class="product-name">{{item.productName}}</div>
                         <div class="info-row">
                             <span class="departure">出发地：{{item.departure}}</span>
-                            <span class="date">时间：{{item.date}}</span>
+                            <span class="date">时间：{{item.travelDate}}</span>
                         </div>
                         <div class="info-row">
                             <span class="price">￥{{item.price}}</span>
@@ -139,7 +138,7 @@ export default {
       },
       page: {
         current: 1,
-        pageSize: 30,
+        pageSize: 5,
       },
       departureOptions: [],
       checkOutForm: [],

@@ -57,6 +57,7 @@
                 flex-direction: row;
                 justify-items: flex-start;
                 justify-content: space-between;
+                align-items: center;
                 @include second-color();
                 @include second-background-color();
               }

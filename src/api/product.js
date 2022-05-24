@@ -1,4 +1,3 @@
-import store from "@/store";
 import request from "@/utils/request";
 
 const base = '/api/product'

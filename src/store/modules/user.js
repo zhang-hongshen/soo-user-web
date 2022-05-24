@@ -3,7 +3,6 @@ import User from "@/api/user";
 
 const getDefaultState = () =>{
   return{
-    userId: '',
     username: '',
     avatar: '',
   }
@@ -14,9 +13,6 @@ const state = getDefaultState()
 const mutations = {
   RESET_STATE: (state) =>{
     Object.assign(state, getDefaultState())
-  },
-  SET_USERID: (state, userId) => {
-    state.userId = userId
   },
   SET_USERNAME: (state, username) => {
     state.username = username
@@ -44,7 +40,6 @@ const actions = {
     const {username, avatar, userId} = await User.getInfo()
     commit('SET_USERNAME', username)
     commit('SET_AVATAR', avatar)
-    commit('SET_USERID', userId)
   },
 
   async register({ commit }, registerForm){

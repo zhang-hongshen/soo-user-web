@@ -1,7 +1,6 @@
 import axios from "axios";
 import {Message} from "element-ui";
 import Auth from "@/utils/auth";
-import router from "@/router";
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_API_BASE_URL
@@ -19,23 +18,17 @@ service.interceptors.request.use(
     return request
   },
   error => {
-    Message.error('错误信息：', error)
+    Message.error('错误信息：'+ error)
   }
 )
 
 service.interceptors.response.use(
   response => {
     if (response.status !== 200) {
-      Message.error('错误码：', response.status)
+      Message.error('错误码：' + response.status)
     } else {
       const res = response.data
-      if (res.success === false) {
-        switch(res.code) {
-          case 401:
-            router.push("/")
-            break
-        }
-      } else {
+      if (res.success === true) {
         const token = response.headers['Authorization']
         if (token) {
           Auth.setToken(token)
@@ -45,7 +38,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    Message.error('错误信息：', error)
+    Message.error('错误信息：' + error)
   }
 )
 

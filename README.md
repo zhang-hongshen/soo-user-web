@@ -1,4 +1,4 @@
-# soo-user
+# soo-user-web
 Soo项目用户端前端代码
 
 ## 项目Web端预览图
